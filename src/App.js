@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ContactForm from './components/ContactForm';
+import ContactList from './components/ContactList';
 
-function App() {
+const App = () => {
+  const [editingContact, setEditingContact] = useState(null);
+
+  const handleEditContact = (contact) => {
+    setEditingContact(contact);
+  };
+
+  const handleComplete = () => {
+    setEditingContact(null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Lista de seus Contatos</h1>
+      <ContactForm existingContact={editingContact} onComplete={handleComplete} />
+      <ContactList onEdit={handleEditContact} />
     </div>
   );
-}
+};
 
 export default App;
